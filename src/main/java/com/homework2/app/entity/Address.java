@@ -1,6 +1,5 @@
 package com.homework2.app.entity;
 
-import com.homework2.example.Ulke;
 import lombok.*;
 
 import javax.persistence.*;
