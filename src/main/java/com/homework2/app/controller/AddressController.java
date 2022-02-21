@@ -2,6 +2,7 @@ package com.homework2.app.controller;
 
 
 import com.homework2.app.dto.*;
+import com.homework2.app.entity.Province;
 import com.homework2.app.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +22,15 @@ public class AddressController {
     private final NeighborhoodService neighborhoodService;
     private final StreetService streetService;
 
+
+    //This function lists all addresses
     @GetMapping
     public ResponseEntity findAll(){
         List<AddressDto> addressDtoList = addressService.findAll();
         return ResponseEntity.ok(addressDtoList);
     }
 
+    //This function saves address
     @PostMapping
     public ResponseEntity save(@RequestBody AddressSaveRequestDto addressSaveRequestDto){
 
@@ -35,13 +39,14 @@ public class AddressController {
         return ResponseEntity.ok(addressDto);
     }
 
-
+    //This function deletes the address with the specified id
     @DeleteMapping("/{id}")
     public ResponseEntity deleteAddress(@PathVariable Long id){
         addressService.delete(id);
         return ResponseEntity.ok(Void.TYPE);
     }
 
+    //This function returns the address with the specified id
     @GetMapping("/find_address/{id}")
     public ResponseEntity findById(@PathVariable Long id){
         AddressDto addressDto = addressService.findById(id);
@@ -50,6 +55,7 @@ public class AddressController {
     }
 
 
+    //This function registers the country.
     @PostMapping("/country")
     public ResponseEntity saveCountry(@RequestBody CountrySaveRequestDto countrySaveRequestDto){
         CountryDto countryDto = countryService.save(countrySaveRequestDto);
@@ -57,6 +63,7 @@ public class AddressController {
         return ResponseEntity.ok(countryDto);
     }
 
+    //this function finds the country by country code.
     @GetMapping("/{country_code}")
     public ResponseEntity findByCountryCode(@PathVariable Long country_code){
 
@@ -66,6 +73,7 @@ public class AddressController {
 
     }
 
+    //This function lists all countries
     @GetMapping("/country_list")
     public ResponseEntity findAllCountry(){
         List<CountryDto> countryDtoList = countryService.findAll();
@@ -73,6 +81,7 @@ public class AddressController {
         return ResponseEntity.ok(countryDtoList);
     }
 
+    //This function registers the province
     @PostMapping("/province")
     public ResponseEntity saveProvince(@RequestBody ProvinceSaveRequestDto provinceSaveRequestDto){
 
@@ -81,6 +90,7 @@ public class AddressController {
         return ResponseEntity.ok(provinceDto);
     }
 
+    //This function lists the provinces by plate code.
     @GetMapping("/province/{plateCode}")
     public ResponseEntity findByPlateCode(@PathVariable Long plateCode){
         List<ProvinceDto> provinceDtoList = provinceService.findByPlateCode(plateCode);
@@ -88,6 +98,7 @@ public class AddressController {
         return ResponseEntity.ok(provinceDtoList);
     }
 
+    //This function lists all provinces
     @GetMapping("/province_list")
     public ResponseEntity findAllProvince() {
         List<ProvinceDto> provinceDtoList = provinceService.findAll();
@@ -95,6 +106,7 @@ public class AddressController {
     }
 
 
+    //This function registers the town.
     @PostMapping("/town")
     public ResponseEntity saveTown(@RequestBody TownSaveRequestDto townSaveRequestDto){
        TownDto townDto =  townService.save(townSaveRequestDto);
@@ -102,6 +114,7 @@ public class AddressController {
        return ResponseEntity.ok(townDto);
     }
 
+    //This function registers the neighborhood
     @PostMapping("/neighborhood")
     public ResponseEntity saveNeighborhood(@RequestBody NeighborhoodSaveRequestDto neighborhoodSaveRequestDto){
 
@@ -110,6 +123,7 @@ public class AddressController {
         return ResponseEntity.ok(neighborhoodDto);
     }
 
+    //This function updates the neighborhood information
     @PutMapping("/neighborhood")
     public ResponseEntity update(@RequestBody NeighborhoodUpdateRequestDto neighborhoodUpdateRequestDto){
         NeighborhoodDto neighborhoodDto = neighborhoodService.update(neighborhoodUpdateRequestDto);
@@ -117,21 +131,13 @@ public class AddressController {
         return ResponseEntity.ok(neighborhoodDto);
     }
 
+    //This function registers street information
     @PostMapping("/street")
     public ResponseEntity saveStreet(@RequestBody StreetSaveRequestDto streetSaveRequestDto){
         StreetDto streetDto = streetService.save(streetSaveRequestDto);
 
         return ResponseEntity.ok(streetDto);
     }
-
-
-
-
-
-
-
-
-
 
 
 
